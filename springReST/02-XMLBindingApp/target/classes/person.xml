@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<person>
+	<address>
+			<city>bandra</city>
+			<country>IND</country>
+			<state>Maharshtra</state>
+    </address>
+	<email>sachin@gmail.com</email>
+	<gender>male</gender>
+	<id>10</id>
+    <name>sachin</name>
+    
+</person>

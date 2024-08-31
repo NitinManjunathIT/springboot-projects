@@ -1,0 +1,12 @@
+{
+	"id" : 18,
+	"firstName": "virat",
+	"lastName" : "kohli",
+	"active"   : true,
+	"address"  : {
+					"cityName":"rcb",
+					"stateName": "karnataka",
+					"countryName": "IND"
+	             },
+	  "friendsName": ["sachin","dhoni","dravid","gambir"]
+}
