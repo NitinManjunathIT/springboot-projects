@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +30,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 //Loading the data from properties file(src/main/resources)
 @TestPropertySource("classpath:application.properties")
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ApplicationTests {
 
 	@Autowired
@@ -37,7 +41,7 @@ public class ApplicationTests {
 	@Test
 	@DisplayName("SAVING STUDENT OBJECT")
 	@Order(1)
-	public void createStudentTest() throws Exception {
+	public void testCreateStudent() throws Exception {
 		String body = "{\"stdName\":\"sachin\",\"stdGen\":\"Male\",\"stdCourse\":\"SBMS\",\"stdAddr\":\"Mumbai-#2/3\"}";
 
 		// 1. Create a dummy request object[M.T,URL,C.T,C.B]
@@ -63,7 +67,7 @@ public class ApplicationTests {
 	@Test
 	@DisplayName("GETTING STUDENT OBJECT")
 	@Order(2)
-	public void getStudentTest() throws Exception {
+	public void testGetStudent() throws Exception {
 		
 		// 1. Create a dummy request object[M.T,URL,C.T,C.B]
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
@@ -83,5 +87,81 @@ public class ApplicationTests {
 		System.out.println(output);
 		assertEquals(MediaType.APPLICATION_JSON_VALUE, response.getContentType());
 	}
+	
+	@Test
+	@DisplayName("GETTING ALL STUDENT DETAIlS")
+	@Order(3)
+	public void testGetAllStudent() throws Exception {
+		
+		// 1. Create a dummy request object[M.T,URL,C.T,C.B]
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+			.get("http://localhost:9999/v1/api/student/all");
+			
+
+		// 2. Send the request and get the response
+		MvcResult result = mockMvc.perform(request).andReturn();
+
+		// 3. Retrieve the data from request object to peform testing
+		MockHttpServletResponse response = result.getResponse();
+
+		// 4. use JUNIT to test wheter the testcase is pass|fail
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+		assertNotNull(response.getContentAsString());
+		String output = response.getContentAsString();
+		System.out.println(output);
+	}
+	
+	@Test
+	@DisplayName("DELETING STUDENT OBJECT")
+	@Order(5)
+	public void testDeleteStudent() throws Exception {
+		
+		// 1. Create a dummy request object[M.T,URL,C.T,C.B]
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+			.delete("http://localhost:9999/v1/api/student/remove/{id}",1);
+			
+
+		// 2. Send the request and get the response
+		MvcResult result = mockMvc.perform(request).andReturn();
+
+		// 3. Retrieve the data from request object to peform testing
+		MockHttpServletResponse response = result.getResponse();
+
+		// 4. use JUNIT to test wheter the testcase is pass|fail
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+		assertNotNull(response.getContentAsString());
+		boolean isTrue = response.getContentAsString().contains("REMOVED");
+		if (!isTrue) {
+			fail("STUDENT NOT DELETED");
+		}
+	}
+	
+	@Test
+	@DisplayName("UPDATE STUDENT DETAIlS")
+	@Order(4)
+	public void testUpdateStudent() throws Exception {
+		
+		String body = "{\"stdId\":1,\"stdName\":\"sachin\",\"stdGen\":\"Male\",\"stdCourse\":\"SBMS\",\"stdAddr\":\"Mumbai-#2/3\"}";
+		
+		// 1. Create a dummy request object[M.T,URL,C.T,C.B]
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+			.put("http://localhost:9999/v1/api/student/modify")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(body);
+			
+
+		// 2. Send the request and get the response
+		MvcResult result = mockMvc.perform(request).andReturn();
+
+		// 3. Retrieve the data from request object to peform testing
+		MockHttpServletResponse response = result.getResponse();
+
+		// 4. use JUNIT to test wheter the testcase is pass|fail
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+		assertNotNull(response.getContentAsString());
+		String output = response.getContentAsString();
+		System.out.println(output);
+	}
+
 
 }
