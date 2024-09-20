@@ -39,6 +39,13 @@ public class ERailResource {
 		body.setFrom(pinfo.getFrom());
 		body.setTo(pinfo.getTo());
 		
+		try {
+			//sleeping for 30sec
+			Thread.sleep(30000);
+		}catch(Exception e) {
+			
+		}
+		
 		return new ResponseEntity<Ticket>(body, HttpStatus.CREATED);
 	}	
 }
