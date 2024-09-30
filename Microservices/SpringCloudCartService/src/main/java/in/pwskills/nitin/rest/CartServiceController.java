@@ -17,6 +17,9 @@ public class CartServiceController {
 	
 	@Value("${server.port}")
 	private String portNo;
+	
+	@Value("${my.app.title}")
+	private String info;
 
 	/*
 	 * METHOD  : GET
@@ -27,7 +30,7 @@ public class CartServiceController {
 	 */
 	@GetMapping("/show")
 	public ResponseEntity<String> getCartDetails(){
-		return ResponseEntity.ok("WELCOME TO CART SERVICE RUNNING ON :: "+portNo);
+		return ResponseEntity.ok("WELCOME TO CART SERVICE RUNNING ON :: "+portNo +"==> Data Retrieved from :: "+ info);
 	}
 	
 	/*
