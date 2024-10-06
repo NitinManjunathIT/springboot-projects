@@ -9,13 +9,13 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>in.pwskills.nitin</groupId>
-	<artifactId>SpringProviderApp-MQ</artifactId>
+	<artifactId>SpringConsumerApp3-MQ</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringProviderApp-MQ</name>
-	<description>AdminServer</description>
+	<name>SpringConsumerApp3-MQ</name>
+	
 	
 	<properties>
-		<java.version>11</java.version>
+		<java.version>18</java.version>
 	</properties>
 	
 	<dependencies>
