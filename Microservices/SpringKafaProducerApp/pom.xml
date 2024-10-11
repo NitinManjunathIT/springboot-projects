@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>in.pwskills.nitin</groupId>
-	<artifactId>SpringKafaExample</artifactId>
+	<artifactId>SpringKafaProducerApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringKafaExample</name>
+	<name>SpringKafaProducerApp</name>
 	<description>kafka example</description>
 	
 	<properties>
