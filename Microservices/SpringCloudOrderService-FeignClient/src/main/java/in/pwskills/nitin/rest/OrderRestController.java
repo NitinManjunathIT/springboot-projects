@@ -23,7 +23,6 @@ public class OrderRestController {
 	 * URL     : /v1/api/order/place
 	 * 
 	 */
-	
 	@Autowired
 	private ICartConsumer consumer;
 	
