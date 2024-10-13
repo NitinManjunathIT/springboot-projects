@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,11 +29,18 @@ public class CartServiceController {
 	 * PATH    : /show
 	 * OUTPUT  : R.E<String>
 	 * URL     : /v1/api/cart/show
+	 * INPUT   : RequestHeader(TOKENID)
 	 * 
 	 */
 	@GetMapping("/show")
-	public ResponseEntity<String> getCartDetails(){
-		return ResponseEntity.ok("WELCOME TO CART SERVICE RUNNING ON :: "+portNo +"==> Data Retrieved from :: "+ info);
+	public ResponseEntity<String> getCartDetails(
+			
+			@RequestHeader("TOKENID")String tokenInfo
+			
+			){
+		return ResponseEntity.ok("WELCOME TO CART SERVICE RUNNING ON :: "
+									+portNo +"==> Data Retrieved from :: "+ info
+									+"PREFILTER DATA IS :: "+tokenInfo);
 	}
 	
 	/*
@@ -45,13 +53,14 @@ public class CartServiceController {
 	 */
 	
 	@GetMapping("/find/{id}")
-	public ResponseEntity<Cart> getCartById(
+	public ResponseEntity<String> getCartById(
 				@PathVariable Integer id) {
 		Cart cart = new Cart();
 		cart.setCartId(id);
 		cart.setCartCost(2300.0);
 		cart.setCartCode("TEST");
-		return ResponseEntity.ok(cart);
+		
+		return ResponseEntity.ok(cart.toString()+"PORT OF CART:: "+portNo);
 	}
 	
 	

@@ -16,7 +16,7 @@ public interface ICartConsumer {
 	public ResponseEntity<String> getCartInfo();
 	
 	@GetMapping("/v1/api/cart/find/{id}")
-	public ResponseEntity<Cart> getCartById(
+	public ResponseEntity<String> getCartById(
 			@PathVariable Integer id) ;
 	
 	@PostMapping("/v1/api/cart/create")
