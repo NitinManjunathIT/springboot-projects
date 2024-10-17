@@ -75,9 +75,7 @@ public class StudentRestController {
 	public Mono<Void> deleteStudentById(	
 		@PathVariable String id){
 		
+		System.out.println(id);
 		return service.deleteStudent(id);
-	}
-	
-	
-	
+	}	
 }
