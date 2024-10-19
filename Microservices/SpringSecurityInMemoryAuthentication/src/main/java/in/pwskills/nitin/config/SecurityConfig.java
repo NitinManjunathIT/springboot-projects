@@ -36,6 +36,7 @@ public class SecurityConfig {
 		
 		System.out.println("SecurityConfig.userDetailService()::INMEMORY DATA...");
 		
+		//Creating a User Object
 		UserDetails user1 = User.withDefaultPasswordEncoder()
 				.username("sachin")
 				.password("tendulkar")
@@ -46,6 +47,7 @@ public class SecurityConfig {
 						.password("kohli")
 						.build();
 		
+		//Storing it in RAM(volatile memory)
 		return new InMemoryUserDetailsManager(user1,user2);
 	}
 	
